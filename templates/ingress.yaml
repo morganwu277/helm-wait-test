@@ -6,7 +6,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: caleffi-test2
+  namespace: test
   labels:
     app: {{ template "test.name" . }}
     chart: {{ template "test.chart" . }}
