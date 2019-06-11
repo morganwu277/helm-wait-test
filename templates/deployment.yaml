@@ -13,7 +13,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: {{ .Values.maxUnavailable }}
+      maxUnavailable: 2
+      maxSurge: 0
   selector:
     matchLabels:
       app: {{ template "test.name" . }}
@@ -29,7 +30,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh"]
-          args: ["-c", "sleep 10 && nginx -g \"daemon off;\""]
+          args: ["-c", "sleep {{ .Values.sleepSeconds}} && nginx -g \"daemon off;\""]
           ports:
             - name: http
               containerPort: 80
